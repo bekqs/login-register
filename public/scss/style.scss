@@ -1,0 +1,280 @@
+@import "libraries/neat/neat";
+@import "_variables";
+@import "_mixins";
+@import "_reset";
+
+@keyframes scale {
+    0% { transform: scale(1);}
+    100% { transform: scale(1.05); }
+}
+
+body {
+    width: 100%;
+    height: 100%;
+    font-family: $font-main;
+    line-height: $lh;
+    letter-spacing: $ls;
+}
+
+.red {
+    color: $clr-red;
+}
+
+.separator {
+    display: block;
+    width: 40px;
+    height: 2px;
+    background: $clr-blue;
+    margin: 27px 0;
+}
+
+.button {
+    width: 140px;
+    height: 50px;
+    color: $clr-white;
+    letter-spacing: $ls-big;
+    font-weight: $bold;
+    border-radius: 25px;
+    font-size: $small;
+    text-transform: uppercase;
+    @include transition($dur: .2s);
+    &.primary {
+        background: $clr-btn;
+        &:hover {
+            background: $btn-hover;
+        }
+    }
+    &.default {
+        background: transparent;
+        border: 2px solid $clr-blue;
+        &:hover {
+            background: $clr-blue;
+        }
+    }
+}
+
+#main {
+    height: 100vh;
+    width: 100%;
+    overflow: auto;
+    @include flex-center;
+    @include grid-container;
+    &:after {
+        position: fixed;
+        height: inherit;
+        width: inherit;
+        background-image: url("../images/bg.jpg");
+        background-position: center;
+        background-repeat: no-repeat;
+        background-size: cover;
+        animation: scale 4s ease-out forwards;
+    }
+    .auth {
+        @include grid-column(8);
+        @include grid-media($medium){
+            @include grid-column(10);
+        }
+        max-width: 920px;
+        position: relative;
+        height: 420px;
+        background: rgba($clr-bg, .9);
+        z-index: 1;
+        #form-wrap {           
+            width: 460px;
+            height: 460px;
+            position: absolute;
+            top: -20px;
+            right: 20px;
+            background: $clr-white;
+            box-shadow: 0 0 142px rgba(#010101, .2);
+            z-index: 2;
+            @include transition;
+            &.slide {
+                right: calc(100% - 460px - 20px);
+            }
+            .folds {
+                height: 420px;
+                width: 10px;
+                background: $clr-fold;
+                position: absolute;
+                right: 100%;
+                top: 20px;
+                &:before, &:after {
+                    content: "";
+                    position: absolute;
+                    width: 0;
+                    height: 0;
+                    border-left: 10px solid transparent;
+                }
+                &:before {
+                    bottom: 100%;
+                    border-bottom: 20px solid $clr-corner;
+                }
+                &:after {
+                    top: 100%;
+                    border-top: 20px solid $clr-corner;
+                }
+            }
+            form {
+                @include flex-center;
+                position: absolute;
+                width: 100%;
+                height: 100%;
+                fieldset {
+                    box-sizing: border-box;
+                    width: 100%;
+                    padding: 64px 90px 60px;
+                    position: absolute;
+                    z-index: 2;
+                    transition: visibility ease-out .5s, opacity ease-out .5s;
+                    opacity: 0;
+                    visibility: hidden;
+                    &.active {
+                        transition: opacity .4s ease-in .2s;
+                        opacity: 1;
+                        visibility: visible;
+                    }
+                    legend {
+                        position: relative;
+                        width: 100%;
+                        top: 64px;
+                        font-size: $big;
+                        font-weight: $light;
+                        #magebit {
+                            float: right;
+                        }
+                    }
+                    .input-wrap {
+                        position: relative;
+                        color: $clr-input;
+                        height: 45px;
+                        label {
+                            position: absolute;
+                            width: 100%;
+                            line-height: 1;
+                            @include transition($dur: .2s);
+                            &:not(:first-child) {
+                                top: 0;
+                            }
+                            img {
+                                float: right;
+                            }
+                        }
+                        .input {
+                            display: block;
+                            position: relative;
+                            width: 100%;
+                            height: 100%;
+                            padding: 0;
+                            margin: 25px 0 0;
+                            border-bottom: 1px solid $clr-border;
+                            color: $clr-input;
+                            &:focus, &:valid {
+                                color: $input-txt;
+                                + label {
+                                    font-size: 11px;
+                                    text-transform: uppercase;
+                                    font-weight: $bold;
+                                }
+                                
+                            }
+                        }
+                        input[type='text'] {
+                            background: url(../images/ic_user.png) no-repeat right top;
+                        }
+                        input[type='email'] {
+                            background: url(../images/ic_mail.png) no-repeat right top;
+                        }
+                        input[type='password'] {
+                            background: url(../images/ic_lock.png) no-repeat right top;
+                        }
+                        input[type='text']:focus, input[type='text']:valid {
+                            background: url(../images/ic_user_active.png) no-repeat right top;
+                        }
+                        input[type='email']:focus, input[type='email']:valid {
+                            background: url(../images/ic_mail_active.png) no-repeat right top;
+                        }
+                        input[type='password']:focus, input[type='password']:valid {
+                            background: url(../images/ic_lock_active.png) no-repeat right top;
+                        }
+                    }
+                }
+            }
+        }
+        .content {
+            width: 100%;
+            height: 100%;
+            position: absolute;
+            top: 0;
+            left: 0;
+            @include flex-center;
+            .content-inactive {
+                box-sizing: border-box;
+                float: left;
+                position: relative;
+                width: 50%;
+                color: $clr-white;
+                padding: 0 80px;
+                .head {
+                    font-size: $big;
+                    font-weight: $light;
+                }
+            }
+        }
+        .btn-wrap {
+            margin-top: 30px;
+            #forgot {
+                float: right;
+                position: relative;
+                top: 7px;
+                color: $clr-input;
+                @include transition($dur: .2s);
+                &:hover {
+                    color: #6580b7;
+                }
+            }
+            .toggle-link {
+                display: none;
+            }
+        }
+    }
+}
+
+footer {
+    z-index: 2;
+    position: absolute;
+    width: 100%;
+    bottom: 50px;
+    font-weight: $bold;
+    text-transform: uppercase;
+    color: #a7b3cb;
+    text-align: center;
+    font-size: $small;
+}
+
+
+@media only screen and (max-width: 1040px) {
+    .auth {
+        background: transparent !important;
+        .folds {
+            display: none;
+        }
+        #form-wrap {
+            left: calc(50% - 230px);
+        }
+        .toggle-link {
+            display: block !important;
+            position: relative;
+            text-align: left;
+            top: 16px;
+            color: $clr-input;
+            @include transition($dur: .2s);
+            &:hover {
+                color: #6580b7;
+            }
+        }
+        .content {
+            visibility: hidden;
+        }
+    }
+}
