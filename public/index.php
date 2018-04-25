@@ -8,7 +8,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
-    <title>Magebit</title>
+    <title>Login</title>
     <link rel="stylesheet" href="css/style.css">
     <link href="https://fonts.googleapis.com/css?family=Source+Sans+Pro:300,400,700" rel="stylesheet">
 </head>
@@ -20,7 +20,7 @@
                 <span class="folds"></span>
                 <form action="signup.php" method="POST" class="form" id="form-signup">
                     <fieldset class="field" id="signup">
-                        <legend>Sign Up<img src="images/logo.png" alt="Magebit" id="magebit"></legend>
+                        <legend>Sign Up</legend>
                         <span class="separator" align="left"></span>
                         <div class="input-wrap">
                             <input type="text" name="name" class="input" spellcheck="false" required>
@@ -42,7 +42,7 @@
                 </form> <!-- End sign up -->
                 <form action="login.php" method="POST" class="form" id="form-login">
                     <fieldset class="field active" id="login">
-                        <legend>Login<img src="images/logo.png" alt="Magebit" id="magebit"></legend>
+                        <legend>Login</legend>
                         <span class="separator" align="left"></span>
                         <div class="input-wrap">
                             <input type="email" name="email" class="input" spellcheck="false" required>
@@ -84,7 +84,6 @@
     </div>
 
     <footer>
-        <p>All Rights Reserved “Magebit” 2016.</p>
     </footer>
 
     <script src="../scripts/main.js"></script>
